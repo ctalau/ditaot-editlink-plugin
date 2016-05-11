@@ -4,3 +4,4 @@ DITA-OT plugin which adds an "edit" link to each topic title. This links opens t
 
 TODO:
 - make the plugin receive several params and compute the editing link.
+- call this plugin with the appropriate params in the userguide project.
