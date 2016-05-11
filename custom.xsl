@@ -23,10 +23,12 @@
       <xsl:attribute name="id"><xsl:apply-templates select="." mode="return-aria-label-id"/></xsl:attribute>
       <xsl:apply-templates/>
       <!-- The edit link -->
-      [<a class="editlink">
-        <xsl:attribute name="href"><xsl:value-of select="@xtrf"/></xsl:attribute>
-        edit
-       </a>]
+      <span class="editlink" style="font-size:14px;margin-left:10px">[ 
+        <a target="_blank">
+          <xsl:attribute name="href">
+            <xsl:value-of select="@xtrf"/>
+          </xsl:attribute>edit</a>
+      ]</span>
       <!-- Done with the edit link -->
   </xsl:element>
   <xsl:value-of select="$newline"/>
