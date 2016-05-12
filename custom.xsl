@@ -22,12 +22,23 @@
       </xsl:call-template>
       <xsl:attribute name="id"><xsl:apply-templates select="." mode="return-aria-label-id"/></xsl:attribute>
       <xsl:apply-templates/>
+    
+      <!-- Compute the URL params for the edit url -->
+      <xsl:variable name="file.path">
+        <xsl:value-of select="substring(@xtrf, 7 + string-length(system-property('cwd')))"/>
+      </xsl:variable>
+      <xsl:variable name="file.url.encoded">
+        <xsl:value-of select="encode-for-uri(concat(system-property('repo.url'), $file.path))"/>
+      </xsl:variable>
+      <xsl:variable name="ditamap.url.encoded">
+        <xsl:value-of select="encode-for-uri(concat(system-property('repo.url'), system-property('ditamap.path')))"/>
+      </xsl:variable>
+
       <!-- The edit link -->
       <span class="editlink" style="font-size:14px;margin-left:10px">[ 
         <a target="_blank">
           <xsl:attribute name="href">
-            <xsl:value-of select="@xtrf"/>-
-            <xsl:value-of select="system-property('java.version')"/>
+            <xsl:value-of select="system-property('webapp.url')"/>app/oxygen.html?url=<xsl:value-of select="$file.url.encoded"/><xsl:text disable-output-escaping="yes">&amp;</xsl:text>ditamap=<xsl:value-of select="$ditamap.url.encoded"/>
           </xsl:attribute>edit</a>
       ]</span>
       <!-- Done with the edit link -->
