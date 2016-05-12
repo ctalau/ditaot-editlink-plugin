@@ -27,7 +27,7 @@
         <a target="_blank">
           <xsl:attribute name="href">
             <xsl:value-of select="@xtrf"/>-
-            <xsl:value-of select="system-property('ditamap')"/>
+            <xsl:value-of select="system-property('java.version')"/>
           </xsl:attribute>edit</a>
       ]</span>
       <!-- Done with the edit link -->
