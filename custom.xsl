@@ -38,7 +38,7 @@
     </xsl:variable>
 
     <!-- The edit link -->
-    <span class="edit-link" style="font-size: 14px; display: table-cell; text-align: right; vertical-align: middle"> 
+    <span class="edit-link" style="font-size: 12px; opacity: 0.6; display: table-cell; text-align: right; vertical-align: middle"> 
       <a target="_blank">
         <xsl:attribute name="href">
           <xsl:value-of select="system-property('webapp.url')"/>app/oxygen.html?url=<xsl:value-of select="$file.url.encoded"/><xsl:text disable-output-escaping="yes">&amp;</xsl:text>ditamap=<xsl:value-of select="$ditamap.url.encoded"/>
