@@ -16,7 +16,7 @@
       </xsl:choose>
   </xsl:param>
   <xsl:element name="h{$headinglevel}">
-    <xsl:attribute name="style">display:table</xsl:attribute>
+    <xsl:attribute name="style">display:table; width:100%;</xsl:attribute>
     <xsl:attribute name="class">topictitle<xsl:value-of select="$headinglevel"/></xsl:attribute>
     <xsl:call-template name="commonattributes">
       <xsl:with-param name="default-output-class">topictitle<xsl:value-of select="$headinglevel"/></xsl:with-param>
