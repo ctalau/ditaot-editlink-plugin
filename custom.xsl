@@ -66,15 +66,15 @@
             </xsl:attribute>    
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>Edit</xsl:text>
+        <xsl:text>[Edit]</xsl:text>
       </a>
-      <xsl:text>&#160;</xsl:text>
+      <xsl:text>&#160;|&#160;</xsl:text>
       <a target="_blank">
         <xsl:attribute name="href">
           <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
           <xsl:value-of select="$directGitHubHistoryLink"/>
         </xsl:attribute>
-        <xsl:text>History</xsl:text>
+        <xsl:text>[History]</xsl:text>
       </a>
     </span>
     <!-- Done with the edit link -->
