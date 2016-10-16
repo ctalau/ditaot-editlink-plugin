@@ -43,6 +43,10 @@
       string-join(($ghData[1], $ghData[2], 'edit', $ghData[3]), '/'),
       '/', $file.path)
     "/>
+    <xsl:variable name="directGitHubHistoryLink" select="concat(
+      string-join(($ghData[1], $ghData[2], 'commits', $ghData[3]), '/'),
+      '/', $file.path)
+    "/>
 
     <!-- The edit link -->
     <span class="edit-link" style="font-size: 12px; opacity: 0.6; display: table-cell; text-align: right; vertical-align: middle"> 
@@ -62,7 +66,15 @@
             </xsl:attribute>    
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>Edit on GitHub</xsl:text>
+        <xsl:text>Edit</xsl:text>
+      </a>
+      <xsl:text>&#160;</xsl:text>
+      <a target="_blank">
+        <xsl:attribute name="href">
+          <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
+          <xsl:value-of select="$directGitHubHistoryLink"/>
+        </xsl:attribute>
+        <xsl:text>History</xsl:text>
       </a>
     </span>
     <!-- Done with the edit link -->
