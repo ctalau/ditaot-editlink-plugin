@@ -51,6 +51,14 @@
     <!-- The edit link -->
     <span class="edit-link" style="font-size: 12px; opacity: 0.6; display: table-cell; text-align: right; vertical-align: middle"> 
       <a target="_blank">
+        <xsl:attribute name="href">
+          <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
+          <xsl:value-of select="$directGitHubHistoryLink"/>
+        </xsl:attribute>
+        <xsl:text>History</xsl:text>
+      </a>
+      <xsl:text>&#160;|&#160;</xsl:text>
+      <a target="_blank">
         <xsl:choose>
           <!-- Check to see if we have a Markdown file and link directly to GitHub-->
           <xsl:when test="ends-with($file.path, '.md')">
@@ -66,15 +74,7 @@
             </xsl:attribute>    
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>[Edit]</xsl:text>
-      </a>
-      <xsl:text>&#160;|&#160;</xsl:text>
-      <a target="_blank">
-        <xsl:attribute name="href">
-          <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
-          <xsl:value-of select="$directGitHubHistoryLink"/>
-        </xsl:attribute>
-        <xsl:text>[History]</xsl:text>
+        <xsl:text>Edit</xsl:text>
       </a>
     </span>
     <!-- Done with the edit link -->
