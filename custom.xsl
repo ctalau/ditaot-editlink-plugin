@@ -36,13 +36,46 @@
     <xsl:variable name="ditamap.url.encoded">
       <xsl:value-of select="encode-for-uri(concat(system-property('repo.url'), system-property('ditamap.path')))"/>
     </xsl:variable>
+    
+    <!-- username/repo/branch/ ->  username/repo/ 'edit' /branch /$file.path -->
+    <xsl:variable name="ghData" select="tokenize(substring-after(system-property('repo.url'), 'github://getFileContent/'), '/')"/>
+    <xsl:variable name="directGitHubEditLink" select="concat(
+      string-join(($ghData[1], $ghData[2], 'edit', $ghData[3]), '/'),
+      '/', $file.path)
+    "/>
+    <xsl:variable name="directGitHubHistoryLink" select="concat(
+      string-join(($ghData[1], $ghData[2], 'commits', $ghData[3]), '/'),
+      '/', $file.path)
+    "/>
 
     <!-- The edit link -->
     <span class="edit-link" style="font-size: 12px; opacity: 0.6; display: table-cell; text-align: right; vertical-align: middle"> 
       <a target="_blank">
         <xsl:attribute name="href">
-          <xsl:value-of select="system-property('webapp.url')"/>app/oxygen.html?url=<xsl:value-of select="$file.url.encoded"/><xsl:text disable-output-escaping="yes">&amp;</xsl:text>ditamap=<xsl:value-of select="$ditamap.url.encoded"/>
-        </xsl:attribute>Edit on GitHub</a>
+          <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
+          <xsl:value-of select="$directGitHubHistoryLink"/>
+        </xsl:attribute>
+        <xsl:text>History</xsl:text>
+      </a>
+      <xsl:text>&#160;|&#160;</xsl:text>
+      <a target="_blank">
+        <xsl:choose>
+          <!-- Check to see if we have a Markdown file and link directly to GitHub-->
+          <xsl:when test="ends-with($file.path, '.md')">
+            <xsl:attribute name="href">
+              <xsl:value-of select="if (system-property('github.url')='') then 'https://github.com/' else system-property('github.url')"/>              
+              <xsl:value-of select="$directGitHubEditLink"/>
+            </xsl:attribute>
+          </xsl:when>
+          <!-- Otherwise use the oXygen XML Web Author link -->
+          <xsl:otherwise>
+            <xsl:attribute name="href">
+              <xsl:value-of select="system-property('webapp.url')"/>app/oxygen.html?url=<xsl:value-of select="$file.url.encoded"/><xsl:text disable-output-escaping="yes">&amp;</xsl:text>ditamap=<xsl:value-of select="$ditamap.url.encoded"/>
+            </xsl:attribute>    
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text>Edit</xsl:text>
+      </a>
     </span>
     <!-- Done with the edit link -->
   </xsl:element>      
